@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.0.0/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.3.4/vue.min.js"></script>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/clock.css">
+    <title>SCADA</title>
+    <script src="assets/js/libraryjs/smoothie.js"></script>
+    <script src="assets/js/libraryjs/raphael-2.1.4.min.js"></script>
+    <script src="assets/js/libraryjs/justgage.js"></script>
+    <script src='assets/js/libraryjs/socket.io.js'></script>
+    <!-- <link href='assets/css/chart.css' rel="stylesheet"> -->
+
+    <script type="text/javascript" src="assets/js/chartjs/fusioncharts.js"></script>
+    <script type="text/javascript" src="assets/js/chartjs/fusioncharts.charts.js"></script>
+    <script type="text/javascript" src="assets/js/chartjs/fusioncharts.timeseries.js"></script>
+    <script type="text/javascript" src="assets/js/chartjs/fusioncharts.widgets.js"></script>
+    <script type="text/javascript" src="assets/js/chartjs/fusioncharts.theme.candy.js"></script>
+    <script type="text/javascript" src="assets/js/chartjs/drawChart.js"></script>
+
+</head>
+<body id="myPage">
+    <!--THANH CONG CU-->
+    <div class="">
+        <div class= "tieude">
+            <nav class="navbar navbar-expand-sm bg-light font-header navbar-light fixed-top">
+                <a class="navbar-brand" href="/hmi" id = "mypageid"><b>SCADA</b></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                    <div>
+                        <ul class="navbar-nav congcu">
+                            <li class="nav-item">
+                                <a class="nav-link" href="/hmi" >HMI</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" href="/history" >HISTORY</a>
+                            </li>
+                            <!-- <li class="nav-item">
+                                <a class="nav-link" href="predict" >PREDICT</a>
+                            </li> -->
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="collapse navbar-collapse justify-content-end" id="collapsibleNavbar">
+                    <div>
+                        <ul class="navbar-nav">
+                            <li class="nav-item"><a id="alogin" href="/logout">LogOut</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+
+    </div>
+<!--CHARTS-->
+ <div>
+     <div class="chart-wrapper">
+         <div id="chart-container"></div>
+         <div id="chart-container1"></div>
+         <div id="chart-container2"></div>
+         <div id="chart-container3"></div>
+         <div id="chart-container4"></div>
+         <div id="chart-container5"></div>
+         <div id="chart-container6"></div>
+     </div>
+     <div class="buttonwrapper" style ="padding-top: 15px;">
+         <div class="form-elements">
+             <div class="input-wrapper">
+                 <select id="format" name="format">
+                     <option value="png">png</option>
+                     <option value="jpg">jpg</option>
+                     <option value="pdf">pdf</option>
+                 </select>
+                 <select id="c" name = "c" >
+                     <option value="flo">Flo</option>
+                     <option value="fe">Fe</option>
+                     <option value="clo">Clo</option>
+                     <option value="al">Al</option>
+                     <option value="cuso4">CuSO4</option>
+                 </select>
+                 <div class="input-wrapper">
+                     <div id="nutbam" style = "display:inline" >
+                         <button  class="export1 btn btn-secondary-grad" style="background-color: #52a0de;font-weight: bold;">Export Chart</button>
+                         <button  class="export2 btn btn-secondary-grad" style="background-color: #52a0de;font-weight: bold;">Export Chart</button>
+                         <button  class="export3 btn btn-secondary-grad" style="background-color: #52a0de;font-weight: bold;">Export Chart</button>
+                         <button  class="export4 btn btn-secondary-grad" style="background-color: #52a0de;font-weight: bold;">Export Chart</button>
+                         <button  class="export5 btn btn-secondary-grad" style="background-color: #52a0de;font-weight: bold;">Export Chart</button>
+                     </div>
+                 </div>
+                 <span class="label-shift-label">Select a format</span>
+                 <span class="label-shift-label1">Select a parameter</span>
+             </div>
+         <button type="button" class="btn btn-secondary-grad" id="draw" style="background-color: #52a0de;margin-top: 0.2rem;
+         padding-top: 0.375rem;font-weight: bold;">Draw Chart</button>
+         <div>
+     </div>
+         </div>
+   </div>
+ </div>
+
+
+
+    <script src="socket.io/socket.io.js"></script>
+    <script src="assets/js/res_client.js"></script>
+    <script src="assets/js/clock.js"></script>
+</body>
+</html>
